@@ -56,7 +56,7 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next(); //nhi hua h toh nikl jaoo.
 
   //   agr hua h toh phir yeh kro.
-  this.password = bcrypt.hash(this.password, 10); // bcrypt ke pass ek method hai hash jisse vo password ko encrypt krta h , and jo hmne number diya h 10 uttne rounds mai encrpt kr dega.
+  this.password = await bcrypt.hash(this.password, 10); // bcrypt ke pass ek method hai hash jisse vo password ko encrypt krta h , and jo hmne number diya h 10 uttne rounds mai encrpt kr dega.
 
   next();
 });
@@ -93,4 +93,4 @@ userSchema.methods.generateRefreshToken = function () {
     }
   );
 };
-export const UserSchema = mongoose.model("UserSchema", userSchema);
+export const User = mongoose.model("User", userSchema);
